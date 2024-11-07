@@ -12,13 +12,16 @@ function createCard(name, link, deleteCallback) {
     cardTitle.textContent = name;
     cardImage.src = link;
     cardImage.alt = name;
-    deleteCallback = deleteButton.addEventListener('click', function () {
-        cardBlock.remove();
+    deleteButton.addEventListener('click', function () {
+        deleteCallback(cardBlock);
     });
     return cardBlock;
 };
+function deleteCallback (cardBlock) {
+    cardBlock.remove()
+};
 // @todo: Вывести карточки на страницу
 initialCards.forEach(function (element) {
-    const cardBlock = createCard(element.name, element.link);
+    const cardBlock = createCard(element.name, element.link, deleteCallback);
     placecCardList.append(cardBlock);
 });
