@@ -1,0 +1,17 @@
+{
+  "name": "messto-project-ff",
+  "version": "0.0.1",
+  "description": "learning platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack",
+    "dev": "webpack serve"
+  },
+  "author": "Artem Marin",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  }
+}
