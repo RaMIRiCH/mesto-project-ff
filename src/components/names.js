@@ -1,4 +1,3 @@
-const cardTemplate = document.querySelector('#card-template');
 const placeCardList = document.querySelector('.places__list');
 const popupImage = document.querySelector('.popup_type_image');
 const popupImageElement = document.querySelector('.popup__image');
@@ -18,7 +17,6 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
 export {
-    cardTemplate,
     placeCardList,
     popupImage,
     popupImageElement,
@@ -28,6 +26,7 @@ export {
     profileEditButton,
     popupAddCard,
     profileAddButton,
+    formElement,
     nameInput,
     jobInput,
     formElementAddCard,
@@ -35,4 +34,4 @@ export {
     cardLinkInput,
     profileTitle,
     profileDescription
-}
+};

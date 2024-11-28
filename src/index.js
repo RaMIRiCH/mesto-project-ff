@@ -3,7 +3,6 @@ import {createCard, deleteCallback, likeCallback} from './components/card.js';
 import {openPopup, closePopup} from './components/modal.js';
 import {initialCards} from './scripts/cards.js';
 import {
-    cardTemplate,
     placeCardList,
     popupImage,
     popupImageElement,
@@ -13,6 +12,7 @@ import {
     profileEditButton,
     popupAddCard,
     profileAddButton,
+    formElement,
     nameInput,
     jobInput,
     formElementAddCard,

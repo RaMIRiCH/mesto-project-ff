@@ -1,6 +1,5 @@
-import { cardTemplate } from "./names";
-
 function createCard(name, link, deleteCallback, openImage, likeCallback) {
+    const cardTemplate = document.querySelector('#card-template');
     const cardBlock = cardTemplate.content.querySelector('.card').cloneNode(true);
     const cardTitle = cardBlock.querySelector('.card__title');
     const cardImage = cardBlock.querySelector('.card__image');
