@@ -1,27 +1,74 @@
-// @todo: Темплейт карточки
-const cardTemplate = document.querySelector('#card-template');
-// @todo: DOM узлы
-const placecCardList = document.querySelector('.places__list');
-// @todo: Функция создания карточки
-// @todo: Функция удаления карточки
-function createCard(name, link, deleteCallback) {
-    const cardBlock = cardTemplate.content.querySelector('.card').cloneNode(true);
-    const cardTitle = cardBlock.querySelector('.card__title');
-    const cardImage = cardBlock.querySelector('.card__image');
-    const deleteButton = cardBlock.querySelector('.card__delete-button');
-    cardTitle.textContent = name;
-    cardImage.src = link;
-    cardImage.alt = name;
-    deleteButton.addEventListener('click', function () {
-        deleteCallback(cardBlock);
-    });
-    return cardBlock;
-};
-function deleteCallback (cardBlock) {
-    cardBlock.remove()
-};
-// @todo: Вывести карточки на страницу
-initialCards.forEach(function (element) {
-    const cardBlock = createCard(element.name, element.link, deleteCallback);
-    placecCardList.append(cardBlock);
+import './pages/index.css';
+import {createCard, deleteCallback, likeCallback} from './components/card.js';
+import {openPopup, closePopup} from './components/modal.js';
+import {initialCards} from './scripts/cards.js';
+import {
+    cardTemplate,
+    placeCardList,
+    popupImage,
+    popupImageElement,
+    popupCaption,
+    closeModalButtons,
+    popupEdit,
+    profileEditButton,
+    popupAddCard,
+    profileAddButton,
+    nameInput,
+    jobInput,
+    formElementAddCard,
+    cardNameInput,
+    cardLinkInput,
+    profileTitle,
+    profileDescription
+} from './components/names.js';
+
+profileAddButton.addEventListener('click', function () {
+    openPopup(popupAddCard);
+})
+
+profileEditButton.addEventListener('click', function () {
+    nameInput.value = profileTitle.textContent;
+    jobInput.value = profileDescription.textContent;
+    openPopup(popupEdit);
 });
+
+initialCards.forEach(function (element) {
+    const cardBlock = createCard(element.name, element.link, deleteCallback, openImage, likeCallback);
+    placeCardList.append(cardBlock);
+});
+
+function openImage(link, name) {
+    popupImageElement.src = link;
+    popupImageElement.alt = name;
+    popupCaption.textContent = name;
+    openPopup(popupImage)
+};
+
+closeModalButtons.forEach((button) => {
+    const popup = button.closest('.popup');
+    button.addEventListener('click', () => {
+        closePopup(popup);
+    });
+ }); 
+
+function handleFormSubmit(evt) {
+    evt.preventDefault();
+    const newName = nameInput.value;
+    const newJob = jobInput.value;
+    profileTitle.textContent = newName;
+    profileDescription.textContent = newJob;
+    closePopup(popupEdit);
+};
+
+function handleCardSubmit(evt) {
+    evt.preventDefault();
+    const cardName = cardNameInput.value;
+    const cardLink = cardLinkInput.value;
+    const cardBlock = createCard(cardName, cardLink, deleteCallback, openImage, likeCallback);
+    placeCardList.prepend(cardBlock);
+    formElementAddCard.reset(); 
+    closePopup(popupAddCard);
+};
+
+formElement.addEventListener('submit', handleFormSubmit); 
+formElementAddCard.addEventListener('submit', handleCardSubmit);
