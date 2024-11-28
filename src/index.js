@@ -12,7 +12,7 @@ import {
     profileEditButton,
     popupAddCard,
     profileAddButton,
-    formElement,
+    formElementProfile,
     nameInput,
     jobInput,
     formElementAddCard,
@@ -51,7 +51,7 @@ closeModalButtons.forEach((button) => {
     });
  }); 
 
-function handleFormSubmit(evt) {
+function handleFormProfileSubmit(evt) {
     evt.preventDefault();
     const newName = nameInput.value;
     const newJob = jobInput.value;
@@ -70,5 +70,5 @@ function handleCardSubmit(evt) {
     closePopup(popupAddCard);
 };
 
-formElement.addEventListener('submit', handleFormSubmit); 
+formElementProfile.addEventListener('submit', handleFormProfileSubmit); 
 formElementAddCard.addEventListener('submit', handleCardSubmit);
