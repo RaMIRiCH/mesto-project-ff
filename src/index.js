@@ -22,14 +22,21 @@ import {
     profileDescription
 } from './components/names.js';
 
+import {clearValidation, enableValidation} from './components/validation.js';
+import {validationElements} from './components/validationElements.js';
+
+enableValidation(validationElements)
+
 profileAddButton.addEventListener('click', function () {
     openPopup(popupAddCard);
+    clearValidation(popupAddCard, validationElements)
 })
 
 profileEditButton.addEventListener('click', function () {
     nameInput.value = profileTitle.textContent;
     jobInput.value = profileDescription.textContent;
     openPopup(popupEdit);
+    clearValidation(popupEdit, validationElements)
 });
 
 initialCards.forEach(function (element) {
