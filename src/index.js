@@ -45,41 +45,41 @@ let cardId;
 
 profileOpenAvatar.addEventListener('click', () => {
   openPopup(modalAvatar);
-  clearValidation(modalAvatar, validationElements)
+  clearValidation(modalAvatar, validationElements);
 });
 
 function addAvatar (evt) {
   evt.preventDefault();
   renderLoading(true, btnSubmitAvatar);
-    newAvatarApi(avatarUrlInput.value)
-  .then((res) => {
-    profileEditAvatar.src = res.avatar;
-    avatarForm.reset();
-    closePopup(modalNewAvatar);
-  })
-  .catch((err) => console.log(err))
-  .finally(() => {
-    renderLoading(false, btnSubmitAvatar);
-  });
+  newAvatarApi(avatarUrlInput.value)
+    .then((res) => {
+      profileEditAvatar.src = res.avatar;
+      avatarForm.reset();
+      closePopup(modalAvatar);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      renderLoading(false, btnSubmitAvatar);
+    });
 };
 
 profileAddButton.addEventListener('click', () => {
   openPopup(popupAddCard);
-  clearValidation(popupAddCard, validationElements)
+  clearValidation(popupAddCard, validationElements);
 });
 
 profileEditButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
   openPopup(popupEdit);
-  clearValidation(popupEdit, validationElements)
+  clearValidation(popupEdit, validationElements);
 });
 
-function openImage(link, name) {
+function openImage(link, alt) {
   popupImageElement.src = link;
-  popupImageElement.alt = name;
-  popupCaption.textContent = name;
-  openPopup(popupImage)
+  popupImageElement.alt = alt;
+  popupCaption.textContent = alt;
+  openPopup(popupImage);
 };
 
 closeModalButtons.forEach((button) => {
@@ -96,11 +96,11 @@ function handleFormProfileSubmit(evt) {
     .then((res) => {
       profileTitle.textContent = res.name;
       profileDescription.textContent = res.about;
-        closePopup(popupEdit);
+      closePopup(popupEdit);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-       renderLoading(false, btnSubmitEditProfile);
+      renderLoading(false, btnSubmitEditProfile);
     });
 };
 
@@ -115,25 +115,24 @@ function handleCardSubmit(evt) {
         deleteCallback,
         likeCallback,
         openImage,
-        userId,
-        cardId,
+        userId
       );
       addCard(newCard, true);
-      addCardForm.reset();
-      closePopup(modalNewCard);
+      formElementAddCard.reset();
+      closePopup(popupAddCard);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      addCardForm.reset();
+      formElementAddCard.reset();
       renderLoading(false, btnSubmitAddNewCard);
-  });
+    });
 };
 
 function addCard(item, atFirst) {
   if (atFirst) {
-    placeCardList.insertBefore(item, btnSubmitAddNewCard);
+    placeCardList.prepend(item);
   } else {
-    placeCardList.append(item)
+    placeCardList.append(item);
   }
 };
 
@@ -141,13 +140,13 @@ function renderLoading(isLoading, submitBtn) {
   if(isLoading) {
     submitBtn.textContent = 'Сохранение...';
   } else {
-    submitBtn.textContent = 'Сохранить'
+    submitBtn.textContent = 'Сохранить';
   }
 };
 
 formElementProfile.addEventListener('submit', handleFormProfileSubmit); 
 formElementAddCard.addEventListener('submit', handleCardSubmit);
-avatarForm.addEventListener('click', addAvatar);
+avatarForm.addEventListener('submit', addAvatar);
 
 Promise.all([getUserRequest(), loadCards()])
   .then(([dataRes, cardRes]) => {
@@ -158,10 +157,10 @@ Promise.all([getUserRequest(), loadCards()])
 
     cardRes.forEach(function (item) {
       cardId = item._id;
-      const card = createCard(item, deleteCallback, likeCallback, openImage, userId, cardId);
+      const card = createCard(item, deleteCallback, likeCallback, openImage, userId);
       addCard(card);
     });
   })
   .catch((err) => {
     console.log(err);
-});
+  });
