@@ -14,7 +14,9 @@
   </header>
   <main class="content">
     <section class="profile page__section">
-      <div class="profile__image" style="background-image: url(<%=require('./images/avatar.jpg')%>);"></div>
+      <div class="profile__avatar">      
+        <img class="profile__image"/>
+      </div>
       <div class="profile__info">
         <h1 class="profile__title">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" type="button"></button>
@@ -33,7 +35,17 @@
       © 2021 Mesto Russia
     </p>
   </footer>
-  
+  <div class="popup popup_type-avatar">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Обновить аватар</h3>
+      <form class="popup__form" name="new-avatar" novalidate>
+        <input id="input-avatar" type="url" name="avatar" class="popup__input popup__input_type_url-avatar" placeholder="Ссылка на картинку" required/>
+        <span class="form__input-error input-avatar-error"></span>
+        <button type="submit" class="button popup__button button-submit-avatar">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <div class="popup popup_type_edit">
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
@@ -54,7 +66,7 @@
       <form class="popup__form" name="new-place" novalidate>
         <input type="text" name="place-name" id="text-input" class="popup__input popup__input_type_card-name" placeholder="Название" minlength="2" maxlength="30" pattern="[а-яА-Яa-zA-ZЁё\-\s]*$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
         <span id="text-input-error" class="form__input-error text-input-error"></span>
-        <input type="url" name="link" id="url-input-error" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required>
+        <input type="url" name="link" id="url-input" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required>
         <span id="url-input-error" class="form__input-error url-input-error"></span>
         <button type="submit" class="button popup__button">Сохранить</button>
       </form>
@@ -68,9 +80,6 @@
     </div>
   </div>
 </div>
-<script src="./scripts/cards.js"></script>
-<script src="./scripts/index.js" defer></script>
-
 <template id="card-template">
   <li class="places__item card">
     <img class="card__image" src="" alt="" />
@@ -79,6 +88,7 @@
       <h2 class="card__title">
       </h2>
       <button type="button" class="card__like-button"></button>
+      <span class="like-counter"></span>
     </div>
   </li>
 </template>

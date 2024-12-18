@@ -15,6 +15,14 @@ const cardNameInput = formElementAddCard.querySelector('.popup__input_type_card-
 const cardLinkInput = formElementAddCard.querySelector('.popup__input_type_url');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
+const avatarForm = document.querySelector('form[name="new-avatar"]');
+const profileOpenAvatar = document.querySelector('.profile__avatar');
+const profileEditAvatar = document.querySelector('.profile__image');
+const modalAvatar = document.querySelector('.popup_type-avatar');
+const avatarUrlInput = document.querySelector('.popup__input_type_url-avatar');
+const btnSubmitAvatar = document.querySelector('.button-submit-avatar');
+const btnSubmitEditProfile = document.querySelector('.button-submit-edit-profile');
+const btnSubmitAddNewCard = document.querySelector('.button-submit-add-new-card');
 
 export {
     placeCardList,
@@ -33,5 +41,13 @@ export {
     cardNameInput,
     cardLinkInput,
     profileTitle,
-    profileDescription
+    profileDescription,
+    avatarForm,
+    profileOpenAvatar,
+    profileEditAvatar,
+    modalAvatar,
+    avatarUrlInput,
+    btnSubmitAvatar,
+    btnSubmitEditProfile,
+    btnSubmitAddNewCard
 };
