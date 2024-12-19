@@ -133,13 +133,13 @@ function addCard(item, atFirst) {
 function renderLoading(isLoading, submitBtn, originalText) {
   if (isLoading) {
     if (!originalText) {
-      originalText = submitBtn.textContent;
+    originalText = submitBtn.textContent;
     }
     submitBtn.textContent = 'Сохранение...';
   } else {
     submitBtn.textContent = originalText;
   }
-}
+};
 
 formElementProfile.addEventListener('submit', handleFormProfileSubmit); 
 formElementAddCard.addEventListener('submit', handleCardSubmit);
