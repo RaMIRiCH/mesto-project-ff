@@ -1,4 +1,5 @@
 const placeCardList = document.querySelector('.places__list');
+const popupButton = document.querySelector('.popup__button')
 const popupImage = document.querySelector('.popup_type_image');
 const popupImageElement = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
@@ -26,6 +27,7 @@ const btnSubmitAddNewCard = document.querySelector('.button-submit-add-new-card'
 
 export {
     placeCardList,
+    popupButton,
     popupImage,
     popupImageElement,
     popupCaption,

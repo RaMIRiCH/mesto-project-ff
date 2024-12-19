@@ -3,6 +3,7 @@ import {createCard, deleteCallback, likeCallback} from './components/card.js';
 import {openPopup, closePopup} from './components/modal.js';
 import {
     placeCardList,
+    popupButton,
     popupImage,
     popupImageElement,
     popupCaption,
@@ -41,6 +42,7 @@ import {validationElements} from './components/validationElements.js';
 enableValidation(validationElements);
 
 let userId;
+const originalText = popupButton.textContent;
 
 profileOpenAvatar.addEventListener('click', () => {
   openPopup(modalAvatar);
@@ -49,7 +51,7 @@ profileOpenAvatar.addEventListener('click', () => {
 
 function addAvatar (evt) {
   evt.preventDefault();
-  renderLoading(true, btnSubmitAvatar);
+  renderLoading(true, btnSubmitAvatar, originalText);
   newAvatarApi(avatarUrlInput.value)
     .then((res) => {
       profileEditAvatar.src = res.avatar;
@@ -58,7 +60,7 @@ function addAvatar (evt) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      renderLoading(false, btnSubmitAvatar);
+      renderLoading(false, btnSubmitAvatar, originalText);
     });
 };
 
@@ -90,7 +92,7 @@ closeModalButtons.forEach((button) => {
 
 function handleFormProfileSubmit(evt) {
   evt.preventDefault();
-  renderLoading(true, btnSubmitEditProfile);
+  renderLoading(true, btnSubmitEditProfile, originalText);
   editProfileApi(nameInput.value, jobInput.value)
     .then((res) => {
       profileTitle.textContent = res.name;
@@ -99,17 +101,16 @@ function handleFormProfileSubmit(evt) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      renderLoading(false, btnSubmitEditProfile);
+      renderLoading(false, btnSubmitEditProfile, originalText);
     });
 };
 
 function handleCardSubmit(evt) {
   evt.preventDefault();
-  renderLoading(true, btnSubmitAddNewCard);
+  renderLoading(true, btnSubmitAddNewCard, originalText);
   addNewCardApi(cardNameInput.value, cardLinkInput.value)
     .then((item) => {
-      item._id = item._id;
-      const newCard = createCard(item, deleteCallback, openImage, likeCallback, userId, item._id);
+      const newCard = createCard(item, deleteCallback, openImage, likeCallback, userId);  // ili k etoy?
       addCard(newCard, true);
       formElementAddCard.reset();
       closePopup(popupAddCard);
@@ -117,7 +118,7 @@ function handleCardSubmit(evt) {
     .catch((err) => console.log(err))
     .finally(() => {
       formElementAddCard.reset();
-      renderLoading(false, btnSubmitAddNewCard);
+      renderLoading(false, btnSubmitAddNewCard, originalText);
     });
 };
 
@@ -129,11 +130,16 @@ function addCard(item, atFirst) {
   }
 };
 
-function renderLoading(isLoading, submitBtn) {
-  if(isLoading) {
+function renderLoading(isLoading, submitBtn, originalText) {
+  if (isLoading) {
+    if (!originalText) {
+      originalText = submitBtn.textContent;
+    }
     submitBtn.textContent = 'Сохранение...';
+  } else {
+    submitBtn.textContent = originalText;
   }
-};
+}
 
 formElementProfile.addEventListener('submit', handleFormProfileSubmit); 
 formElementAddCard.addEventListener('submit', handleCardSubmit);
@@ -146,7 +152,7 @@ Promise.all([getUserRequest(), loadCards()])
     profileDescription.textContent = dataRes.about;
     profileEditAvatar.src = dataRes.avatar;
     cardRes.forEach(function (item) {
-      const card = createCard(item, deleteCallback, openImage, likeCallback, userId, item._id);
+      const card = createCard(item, deleteCallback, openImage, likeCallback, userId);
       addCard(card);
     });
   })
