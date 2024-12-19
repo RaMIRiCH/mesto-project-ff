@@ -41,7 +41,6 @@ import {validationElements} from './components/validationElements.js';
 enableValidation(validationElements);
 
 let userId;
-let cardId;
 
 profileOpenAvatar.addEventListener('click', () => {
   openPopup(modalAvatar);
@@ -109,8 +108,8 @@ function handleCardSubmit(evt) {
   renderLoading(true, btnSubmitAddNewCard);
   addNewCardApi(cardNameInput.value, cardLinkInput.value)
     .then((item) => {
-      cardId = item._id;
-      const newCard = createCard(item, deleteCallback, openImage, likeCallback, userId, cardId);
+      item._id = item._id;
+      const newCard = createCard(item, deleteCallback, openImage, likeCallback, userId, item._id);
       addCard(newCard, true);
       formElementAddCard.reset();
       closePopup(popupAddCard);
@@ -133,8 +132,6 @@ function addCard(item, atFirst) {
 function renderLoading(isLoading, submitBtn) {
   if(isLoading) {
     submitBtn.textContent = 'Сохранение...';
-  } else {
-    submitBtn.textContent = 'Сохранить';
   }
 };
 
@@ -149,8 +146,7 @@ Promise.all([getUserRequest(), loadCards()])
     profileDescription.textContent = dataRes.about;
     profileEditAvatar.src = dataRes.avatar;
     cardRes.forEach(function (item) {
-      cardId = item._id;
-      const card = createCard(item, deleteCallback, openImage, likeCallback, userId, cardId);
+      const card = createCard(item, deleteCallback, openImage, likeCallback, userId, item._id);
       addCard(card);
     });
   })

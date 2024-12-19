@@ -56,7 +56,6 @@ const toggleButtonState = (inputList, buttonElement, elements) => {
 export const enableValidation = (elements) => {
     const formList = document.querySelectorAll(elements.formSelector);
     for (const formElement of formList) {
-        formElement.addEventListener('submit', (evt) => evt.preventDefault());
         setEventListeners(formElement, elements);
     }
 };
