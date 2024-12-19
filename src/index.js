@@ -75,10 +75,10 @@ profileEditButton.addEventListener('click', () => {
   clearValidation(popupEdit, validationElements);
 });
 
-function openImage(link, alt) {
+function openImage(link, name) {
   popupImageElement.src = link;
-  popupImageElement.alt = alt;
-  popupCaption.textContent = alt;
+  popupImageElement.alt = name;
+  popupCaption.textContent = name;
   openPopup(popupImage);
 };
 
@@ -113,8 +113,8 @@ function handleCardSubmit(evt) {
       const newCard = createCard(
         item,
         deleteCallback,
-        likeCallback,
         openImage,
+        likeCallback,
         userId
       );
       addCard(newCard, true);
@@ -154,10 +154,9 @@ Promise.all([getUserRequest(), loadCards()])
     profileTitle.textContent = dataRes.name;
     profileDescription.textContent = dataRes.about;
     profileEditAvatar.src = dataRes.avatar;
-
     cardRes.forEach(function (item) {
       cardId = item._id;
-      const card = createCard(item, deleteCallback, likeCallback, openImage, userId);
+      const card = createCard(item, deleteCallback, openImage, likeCallback, userId);
       addCard(card);
     });
   })
