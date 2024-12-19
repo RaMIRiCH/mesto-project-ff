@@ -3,7 +3,6 @@ import {createCard, deleteCallback, likeCallback} from './components/card.js';
 import {openPopup, closePopup} from './components/modal.js';
 import {
     placeCardList,
-    popupButton,
     popupImage,
     popupImageElement,
     popupCaption,
@@ -42,7 +41,6 @@ import {validationElements} from './components/validationElements.js';
 enableValidation(validationElements);
 
 let userId;
-const originalText = popupButton.textContent;
 
 profileOpenAvatar.addEventListener('click', () => {
   openPopup(modalAvatar);
@@ -51,6 +49,7 @@ profileOpenAvatar.addEventListener('click', () => {
 
 function addAvatar (evt) {
   evt.preventDefault();
+  const originalText = btnSubmitAvatar.textContent;
   renderLoading(true, btnSubmitAvatar, originalText);
   newAvatarApi(avatarUrlInput.value)
     .then((res) => {
@@ -92,6 +91,7 @@ closeModalButtons.forEach((button) => {
 
 function handleFormProfileSubmit(evt) {
   evt.preventDefault();
+  const originalText = btnSubmitEditProfile.textContent;
   renderLoading(true, btnSubmitEditProfile, originalText);
   editProfileApi(nameInput.value, jobInput.value)
     .then((res) => {
@@ -107,6 +107,7 @@ function handleFormProfileSubmit(evt) {
 
 function handleCardSubmit(evt) {
   evt.preventDefault();
+  const originalText = btnSubmitAddNewCard.textContent;
   renderLoading(true, btnSubmitAddNewCard, originalText);
   addNewCardApi(cardNameInput.value, cardLinkInput.value)
     .then((item) => {
