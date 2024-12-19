@@ -1,5 +1,5 @@
 const config = {
-  baseUrl: 'https://nomoreparties.co/v1/wff-cohort-28',
+  baseUrl: "https://nomoreparties.co/v1/wff-cohort-28",
   headers: {
     authorization: 'ede33469-0c8b-43b9-8038-818f8489abc5',
     'Content-type': 'application/json',

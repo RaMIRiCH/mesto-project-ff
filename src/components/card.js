@@ -30,7 +30,7 @@ function createCard(item, deleteCallback, openImage, likeCallback, userId, cardI
     return cardBlock;
 };
 
-function deleteCallback(cardId, card) {
+function deleteCallback(card, cardId) {
     deleteDataCard(cardId)
     .then(() => {
         card.remove();

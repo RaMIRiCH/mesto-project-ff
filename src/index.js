@@ -110,13 +110,7 @@ function handleCardSubmit(evt) {
   addNewCardApi(cardNameInput.value, cardLinkInput.value)
     .then((item) => {
       cardId = item._id;
-      const newCard = createCard(
-        item,
-        deleteCallback,
-        openImage,
-        likeCallback,
-        userId
-      );
+      const newCard = createCard(item, deleteCallback, openImage, likeCallback, userId, cardId);
       addCard(newCard, true);
       formElementAddCard.reset();
       closePopup(popupAddCard);
@@ -156,7 +150,7 @@ Promise.all([getUserRequest(), loadCards()])
     profileEditAvatar.src = dataRes.avatar;
     cardRes.forEach(function (item) {
       cardId = item._id;
-      const card = createCard(item, deleteCallback, openImage, likeCallback, userId);
+      const card = createCard(item, deleteCallback, openImage, likeCallback, userId, cardId);
       addCard(card);
     });
   })
