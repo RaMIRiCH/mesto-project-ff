@@ -133,9 +133,6 @@ function addCard(item, atFirst) {
 
 function renderLoading(isLoading, submitBtn, originalText) {
   if (isLoading) {
-    if (!originalText) {
-    originalText = submitBtn.textContent;
-    }
     submitBtn.textContent = 'Сохранение...';
   } else {
     submitBtn.textContent = originalText;
